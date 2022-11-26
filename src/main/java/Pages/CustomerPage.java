@@ -6,18 +6,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 // Класс страницы с формой Для кого заказ
-public class CustomerData {
+public class CustomerPage {
 
     private WebDriver driver;
 
     // поле Имя
-    private By nameField = By.xpath(".//div[@class='Order_Form__17u6u']/div[1]/input");
+    private By nameField = By.xpath(".//input[@placeholder='* Имя']");
 
     // поле Фамилия
-    private By surnameField = By.xpath(".//div[@class='Order_Form__17u6u']/div[2]/input");
+    private By surnameField = By.xpath(".//input[@placeholder='* Фамилия']");
 
     // поле Адрес: куда привезти заказ
-    private By addressField = By.xpath(".//div[@class='Order_Form__17u6u']/div[3]/input");
+    private By addressField = By.xpath(".//input[@placeholder='* Адрес: куда привезти заказ']");
 
     // поле Станция метро
     private By metroStationField = By.xpath(".//input[@class='select-search__input']");
@@ -26,12 +26,12 @@ public class CustomerData {
     private By metroStationList = By.xpath(".//div[@class='select-search__select']");
 
     // поле Телефон
-    private By phoneField = By.xpath(".//div[@class='Order_Form__17u6u']/div[5]/input");
+    private By phoneField = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
 
     // кнопка Далее
     private By buttonNext = By.cssSelector(".Button_Button__ra12g.Button_Middle__1CSJM");
 
-    public CustomerData (WebDriver driver) {
+    public CustomerPage(WebDriver driver) {
         this.driver = driver;
     }
 

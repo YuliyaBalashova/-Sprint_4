@@ -4,9 +4,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import Pages.*;
-
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 @RunWith(Parameterized.class)
 public class TestOrder {
@@ -43,7 +42,7 @@ public class TestOrder {
         this.comment = comment;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тестовые данные: {0} {1} {2} {3} {4} {5} {6} {7} {8} {9}")
     public static Object[][] getData() {
         //тестовые данные
         return new Object[][] {
@@ -51,7 +50,6 @@ public class TestOrder {
                 {"Иван", "Корсаков", "Ленина 26", "Курская", "+79261112263", "декабрь 2022", "30", "двое суток", "серая безысходность", "Второй подъезд"},
         };
     }
-
 
     @Test
     public void checkOrder() {
@@ -69,7 +67,7 @@ public class TestOrder {
         objHomePage.clickInOrderUp();
 
         //объект класса страницы Для кого заказ
-        CustomerData objCustomerData = new CustomerData(driver);
+        CustomerPage objCustomerData = new CustomerPage(driver);
 
         //ожидание, что страница Для кого заказ загрузилась
         objCustomerData.waitForLoadCustomerData();
@@ -79,16 +77,13 @@ public class TestOrder {
         objCustomerData.fillCustomerNext();
 
         //объект класса страницы Про аренду
-        RentalData objRentalData = new RentalData(driver);
+        RentalPage objRentalData = new RentalPage(driver);
 
         //ожидание, что страница Про аренду загрузилась
         objRentalData.waitForLoadRentalData();
 
         //Заполнить форму Про аренду и нажать Заказать
-        objRentalData.fillRentalCalendar(monthYear, day);
-        objRentalData.fillRentalDays(arendaDays);
-        objRentalData.fillRentalColor(color);
-        objRentalData.fillRentalComment(comment);
+        objRentalData.fillRentalData(monthYear, day, arendaDays, color, comment);
         objRentalData.fillRentalOrder();
 
         //ожидание, что открылось окно подтверждения заказа
@@ -123,7 +118,7 @@ public class TestOrder {
         objHomePage.clickInOrderDown();
 
         //объект класса страницы Для кого заказ
-        CustomerData objCustomerData = new CustomerData(driver);
+        CustomerPage objCustomerData = new CustomerPage(driver);
 
         //ожидание, что страница Для кого заказ загрузилась
         objCustomerData.waitForLoadCustomerData();
@@ -133,16 +128,13 @@ public class TestOrder {
         objCustomerData.fillCustomerNext();
 
         //объект класса страницы Про аренду
-        RentalData objRentalData = new RentalData(driver);
+        RentalPage objRentalData = new RentalPage(driver);
 
         //ожидание, что страница Про аренду загрузилась
         objRentalData.waitForLoadRentalData();
 
         //Заполнить форму Про аренду и нажать Заказать
-        objRentalData.fillRentalCalendar(monthYear, day);
-        objRentalData.fillRentalDays(arendaDays);
-        objRentalData.fillRentalColor(color);
-        objRentalData.fillRentalComment(comment);
+        objRentalData.fillRentalData(monthYear, day, arendaDays, color, comment);
         objRentalData.fillRentalOrder();
 
         //ожидание, что открылось окно подтверждения заказа
@@ -157,7 +149,6 @@ public class TestOrder {
         //Проверить, что заказ создался
         objRentalData.checkOrder();
     }
-
 
     @After
     public void  tearDown() {

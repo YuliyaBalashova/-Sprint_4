@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import Pages.*;
 
-
 public class TestQuestions {
 
     //драйвер для браузера Chrome
@@ -58,7 +57,5 @@ public class TestQuestions {
         assertTrue(checkRoad);
 
         driver.quit();
-
     }
-
 }

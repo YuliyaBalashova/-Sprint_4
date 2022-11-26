@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 // Класс страницы с формой Про аренду
-public class RentalData {
+public class RentalPage {
 
     private WebDriver driver;
 
@@ -23,13 +23,13 @@ public class RentalData {
     private By arendaField = By.cssSelector(".Dropdown-placeholder");
 
     //выпадающий список дней аренды
-    private By arendaOneDay = By.xpath(".//div[@class='Dropdown-menu']/div[1]");
-    private By arendaTwoDay = By.xpath(".//div[@class='Dropdown-menu']/div[2]");
-    private By arendaThreeDay = By.xpath(".//div[@class='Dropdown-menu']/div[3]");
-    private By arendaFourDay = By.xpath(".//div[@class='Dropdown-menu']/div[4]");
-    private By arendaFiveDay = By.xpath(".//div[@class='Dropdown-menu']/div[5]");
-    private By arendaSixDay = By.xpath(".//div[@class='Dropdown-menu']/div[6]");
-    private By arendaSevenDay = By.xpath(".//div[@class='Dropdown-menu']/div[7]");
+    private By arendaOneDay = By.xpath(".//div[@class='Dropdown-menu']/div[text()='сутки']");
+    private By arendaTwoDay = By.xpath(".//div[@class='Dropdown-menu']/div[text()='двое суток']");
+    private By arendaThreeDay = By.xpath(".//div[@class='Dropdown-menu']/div[text()='трое суток']");
+    private By arendaFourDay = By.xpath(".//div[@class='Dropdown-menu']/div[text()='четверо суток']");
+    private By arendaFiveDay = By.xpath(".//div[@class='Dropdown-menu']/div[text()='пятеро суток']");
+    private By arendaSixDay = By.xpath(".//div[@class='Dropdown-menu']/div[text()='шестеро суток']");
+    private By arendaSevenDay = By.xpath(".//div[@class='Dropdown-menu']/div[text()='семеро суток']");
 
     //чек-бокс Цвет самоката Черный жемчуг
     private By colorBlackBox = By.id("black");
@@ -52,7 +52,7 @@ public class RentalData {
     //Текст в окне заказа: Заказ оформлен
     private By textOrder = By.xpath(".//div[@class='Order_ModalHeader__3FDaJ'and text()='Заказ оформлен']");
 
-    public RentalData(WebDriver driver) {
+    public RentalPage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -62,10 +62,8 @@ public class RentalData {
     }
 
     // методы для заполнения формы Про аренду
-
-    //метод заполнения поля Когда привезти самокат
-    public void fillRentalCalendar(String monthYear, String day) {
-
+    public void fillRentalData(String monthYear, String day, String arendaDays, String color, String comment) {
+        //метод заполнения поля Когда привезти самокат
         driver.findElement(calendarField).click();                             //кликнуть на поле календарь
         String elementMonth = driver.findElement(calendarMonthYear).getText();
         while (!elementMonth.equals(monthYear)) {
@@ -73,11 +71,8 @@ public class RentalData {
             elementMonth = driver.findElement(calendarMonthYear).getText(); //присвоить переменной новое значение
         }
         driver.findElement(By.xpath(String.format(".//div[(not(contains(@class,'react-datepicker__day--outside-month')) and text()='%s')]", day))).click();  //выбрать день (class задан с учетом того, что число д.б. настоящего месяца)
-    }
 
-    //метод заполнения поля Срок аренды
-    public void fillRentalDays(String arendaDays) {
-
+        //метод заполнения поля Срок аренды
         driver.findElement(arendaField).click();                  //кликнуть на поле срок аренды
         if (arendaDays.equals("сутки")) {
             driver.findElement(arendaOneDay).click();            //кликнуть на элемент списка дней аренды: сутки
@@ -100,19 +95,16 @@ public class RentalData {
         if (arendaDays.equals("семеро суток")) {
             driver.findElement(arendaSevenDay).click();
         }
-    }
 
-    //метод заполнения поля Цвет самоката
-    public void fillRentalColor(String color) {
+        //метод заполнения поля Цвет самоката
         if (color.equals("чёрный жемчуг")) {
             driver.findElement(colorBlackBox).click();           //кликнуть на чек-бокс с цветом Черный жемчуг
-        } if (color.equals("серая безысходность")) {
+        }
+        if (color.equals("серая безысходность")) {
             driver.findElement(colorGreyBox).click();            //кликнуть на чек-бокс с цветом Серая безысходность
         }
-    }
 
-    //метод заполнения поля Комментарий
-    public void fillRentalComment(String comment) {
+        //метод заполнения поля Комментарий
         driver.findElement(commentField).click();                 //кликнуть на поле комментарий
         driver.findElement(commentField).sendKeys(comment);       //заполнить поле комментарий
     }
@@ -121,7 +113,6 @@ public class RentalData {
     public void fillRentalOrder() {
         driver.findElement(buttonOrder).click();
     }
-
 
     //метод ожидания, что открылось окно подтверждения заказа
     public void waitForLoadConfirm() {
@@ -142,5 +133,4 @@ public class RentalData {
     public void checkOrder() {
         driver.findElement(textOrder).isEnabled();
     }
-
 }
