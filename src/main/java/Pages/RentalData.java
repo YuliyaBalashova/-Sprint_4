@@ -133,7 +133,7 @@ public class RentalData {
         driver.findElement(buttonYes).click();
     }
 
-    //метод ожидания, что открылось окно созданного заказа
+    //ожидание, что открылось окно созданного заказа
     public void waitForLoadOrder() {
         new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(buttonStatusOrder));
     }

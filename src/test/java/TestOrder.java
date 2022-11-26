@@ -11,10 +11,10 @@ import Pages.*;
 @RunWith(Parameterized.class)
 public class TestOrder {
 
-    // драйвер для браузера Chrome
+    //драйвер для браузера Chrome
     private WebDriver driver = new ChromeDriver();
 
-    // драйвер для браузера Firefox
+    //драйвер для браузера Firefox
     //private WebDriver driver = new FirefoxDriver();
 
     // поля

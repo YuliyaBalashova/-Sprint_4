@@ -35,7 +35,7 @@ public class CustomerData {
         this.driver = driver;
     }
 
-    //метод ожидания, что страница загрузилась
+    //ожидание, что страница загрузилась
     public void waitForLoadCustomerData() {
         new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(buttonNext));
     }

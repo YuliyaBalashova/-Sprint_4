@@ -10,7 +10,7 @@ public class HomePage {
 
     private WebDriver driver;
 
-    // все элементы с вопросами
+    // Все элементы с вопросами
     private By allImportantQuestions = By.xpath(".//div[contains(@id,'accordion__heading-')]");
 
     // 1 элемент с вопросом: Сколько это стоит? И как оплатить?
